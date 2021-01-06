@@ -11,7 +11,8 @@ A typical 4-minute song at CD quality (44 kHz, 16-bit) has over 10 million times
 
  - previous work on MuseNet  synthesized music based on large amounts of MIDI data
 
-Method:
+### Method
+
  - based on Vector Quantised-Variational AutoEncoders [VQ-VAE] (NeurIPS 2017) and VQ-VAE-2 (NeurIPS 2019)
  https://papers.nips.cc/paper/7210-neural-discrete-representation-learning.pdf
  https://arxiv.org/pdf/1906.00446.pdf
@@ -21,7 +22,11 @@ Method:
  - three levels in our VQ-VAE, shown below, which compress the 44kHz raw audio by 8x, 32x, and 128x, respectively, with a codebook size of 2048 for each level.
  - Generating codes using transformers. Sparse Transformers as the learned priors for VQ-VAEs.
   - 3 levels of priors: a top-level prior that generates the most compressed codes, and two upsampling priors that generate less compressed codes conditioned on above.
-  - 
+
+Learning Music Priors and Upsamplers:
+- [Sparse Transformers](https://openai.com/blog/sparse-transformer/) as the learned priors for VQ-VAEs.
+
+
 Conditional music generation:
   - The top-level transformer is trained on the task of predicting compressed audio tokens conditionedf on artist and genre.
   - Lyrics conditioning using an extra encoder to produce a representation for the lyrics and attention layers that use queries from the music decoder to attend to keys and values from the lyrics encoder.
@@ -31,7 +36,8 @@ Conditional music generation:
   - Colected a new dataset of 1.2 million songs (600,000 of which are in English), paired with the corresponding lyrics and metadata from LyricWiki.
 
 
-Results and Limitations:
+### Results and Limitations
+
 - There is still a significant gap between these generations and human-created music.
 -  local musical coherence, traditional chord patterns, impressive solos.
 - No choruses that repeat.
